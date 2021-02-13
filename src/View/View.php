@@ -20,9 +20,14 @@ class View
         return ob_get_clean();
     }
 
-    protected static function getViewContent($view)
+    public static function makeError($error)
     {
-        $path = view_path();
+        self::getViewContent($error, true);
+    }
+
+    protected static function getViewContent($view, $isError = false)
+    {
+        $path = $isError ? view_path() . 'errors/' : view_path();
 
         if (str_contains($view, '.')) {
             $views = explode('.', $view);
@@ -36,8 +41,12 @@ class View
             $view = $path . $view . '.php';
         }
 
-        ob_start();
-        include $view;
-        return ob_get_clean();
+        if ($isError) {
+            include $view;
+        } else {
+            ob_start();
+            include $view;
+            return ob_get_clean();
+        }
     }
 }

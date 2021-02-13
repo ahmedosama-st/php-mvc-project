@@ -2,6 +2,8 @@
 
 namespace Acme\Http;
 
+use Acme\View\View;
+
 class Route
 {
     protected Request $request;
@@ -28,6 +30,10 @@ class Route
         $path = $this->request->path();
         $method = $this->request->method();
         $action = self::$routes[$method][$path] ?? false;
+
+        if (!array_key_exists($path, self::$routes[$method])) {
+            View::makeError('404');
+        }
 
         if (!$action) {
             return;
