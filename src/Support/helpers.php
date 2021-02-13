@@ -32,9 +32,9 @@ if (!function_exists('public_path')) {
 }
 
 if (!function_exists('view')) {
-    function view($view)
+    function view($view, $params = [])
     {
-        View::make($view);
+        View::make($view, $params);
     }
 }
 

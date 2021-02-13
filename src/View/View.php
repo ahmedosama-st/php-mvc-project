@@ -4,11 +4,11 @@ namespace Acme\View;
 
 class View
 {
-    public static function make($view)
+    public static function make($view, $params = [])
     {
         $baseContent = self::getBaseContent();
 
-        $viewContent = self::getViewContent($view);
+        $viewContent = self::getViewContent($view, params: $params);
 
         echo(str_replace('{{content}}', $viewContent, $baseContent));
     }
@@ -25,7 +25,7 @@ class View
         self::getViewContent($error, true);
     }
 
-    protected static function getViewContent($view, $isError = false)
+    protected static function getViewContent($view, $isError = false, $params = [])
     {
         $path = $isError ? view_path() . 'errors/' : view_path();
 
@@ -39,6 +39,10 @@ class View
             $view = $path . end($views) . '.php';
         } else {
             $view = $path . $view . '.php';
+        }
+
+        foreach ($params as $param => $value) {
+            $$param = $value;
         }
 
         if ($isError) {

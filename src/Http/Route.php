@@ -50,7 +50,7 @@ class Route
             $controller = new $action[0];
             $method = $action[1];
 
-            echo call_user_func_array([$controller, $method], []);
+            call_user_func_array([$controller, $method], []);
         }
     }
 }
