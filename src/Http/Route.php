@@ -7,12 +7,14 @@ use Acme\View\View;
 class Route
 {
     protected Request $request;
+    protected Response $response;
 
     protected static array $routes = [];
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Response $response)
     {
         $this->request = $request;
+        $this->response = $response;
     }
 
     public static function get($route, $action)
@@ -32,6 +34,7 @@ class Route
         $action = self::$routes[$method][$path] ?? false;
 
         if (!array_key_exists($path, self::$routes[$method])) {
+            $this->response->setStatusCode(404);
             View::makeError('404');
         }
 
