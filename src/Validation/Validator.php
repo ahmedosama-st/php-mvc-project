@@ -4,22 +4,29 @@ namespace Acme\Validation;
 
 class Validator
 {
-    protected static array $data = [];
+    protected array $data = [];
 
-    public static function make($data)
+    protected array $errors = [];
+
+    public function make($data)
     {
-        self::$data = $data;
+        $this->data = $data;
 
-        self::validate($data);
+        $this->validate($data);
     }
 
-    protected static function validate($data)
+    protected function validate($data)
     {
         var_dump($data);
     }
 
-    protected static function passes()
+    public function passes()
     {
-        return ;
+        return  empty($this->errors());
+    }
+
+    public function errors()
+    {
+        return $this->errors;
     }
 }

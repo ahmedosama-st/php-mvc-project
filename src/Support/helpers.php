@@ -3,6 +3,8 @@
 use Acme\View\View;
 use Acme\Application;
 use Acme\Http\Request;
+use Acme\Support\Hash;
+use Acme\Validation\Validator;
 
 if (!function_exists('env')) {
     function env($key)
@@ -61,5 +63,19 @@ if (!function_exists('request')) {
         }
 
         return $instance;
+    }
+}
+
+if (!function_exists('validator')) {
+    function validator()
+    {
+        return (new Validator());
+    }
+}
+
+if (!function_exists('bcrypt')) {
+    function bcrypt($data)
+    {
+        return Hash::make($data);
     }
 }

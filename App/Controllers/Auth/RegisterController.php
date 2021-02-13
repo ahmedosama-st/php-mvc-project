@@ -14,6 +14,6 @@ class RegisterController extends Controller
 
     public function store()
     {
-        Validator::make(request()->all());
+        validator()->make(request()->all());
     }
 }
