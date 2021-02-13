@@ -4,5 +4,12 @@
       "App\\": "App",
       "Acme\\": "src"
     }
+  },
+  "require": {
+    "phpmailer/phpmailer": "^6.2",
+    "symfony/var-dumper": "^5.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
   }
 }
