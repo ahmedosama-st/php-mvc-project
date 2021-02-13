@@ -14,4 +14,9 @@ class Request
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
+
+    public function all()
+    {
+        return $_REQUEST;
+    }
 }

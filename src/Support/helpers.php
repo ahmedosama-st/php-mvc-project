@@ -2,6 +2,7 @@
 
 use Acme\View\View;
 use Acme\Application;
+use Acme\Http\Request;
 
 if (!function_exists('env')) {
     function env($key)
@@ -45,8 +46,20 @@ if (!function_exists('app')) {
 
         if (!$instance) {
             return new Application;
-        } else {
-            return $instance;
         }
+        return $instance;
+    }
+}
+
+if (!function_exists('request')) {
+    function request()
+    {
+        $instance = new Request;
+
+        if (!$instance) {
+            return new Request;
+        }
+
+        return $instance;
     }
 }
