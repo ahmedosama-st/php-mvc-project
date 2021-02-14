@@ -1,0 +1,18 @@
+<?php
+
+namespace Acme\Validation\Rules;
+
+use Acme\Validation\Rules\Contract\Rule;
+
+class EmailRule implements Rule
+{
+    public function apply($value)
+    {
+        return preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i", $value);
+    }
+
+    public function __toString()
+    {
+        return '%s is not a valid email address';
+    }
+}
