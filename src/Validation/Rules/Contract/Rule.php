@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Validation\Rules\Contract;
+namespace SecTheater\Validation\Rules\Contract;
 
 interface Rule
 {

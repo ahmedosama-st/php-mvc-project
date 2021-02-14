@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Validation\Rules;
+namespace SecTheater\Validation\Rules;
 
-use Acme\Validation\Rules\Contract\Rule;
+use SecTheater\Validation\Rules\Contract\Rule;
 
 class RequiredRule implements Rule
 {

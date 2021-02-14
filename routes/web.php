@@ -1,6 +1,6 @@
 <?php
 
-use Acme\Http\Route;
+use SecTheater\Http\Route;
 use App\Controllers\Auth\RegisterController;
 use App\Controllers\HomeController;
 use App\Controllers\ContactController;

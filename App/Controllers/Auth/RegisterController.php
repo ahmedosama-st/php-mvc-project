@@ -2,11 +2,8 @@
 
 namespace App\Controllers\Auth;
 
-use Acme\Validation\Validator;
+use SecTheater\Validation\Validator;
 use App\Controllers\Controller;
-use Acme\Validation\Rules\EmailRule;
-use Acme\Validation\Rules\AlphaNumRule;
-use Acme\Validation\Rules\RequiredRule;
 
 class RegisterController extends Controller
 {
@@ -19,8 +16,8 @@ class RegisterController extends Controller
     {
         $validator = new Validator;
         $validator->setRules([
-            'username' => [new RequiredRule, new AlphaNumRule],
-            'email' => [new RequiredRule, new EmailRule]
+            'username' => ['required', 'alnum'],
+            'email' => 'required|email'
         ]);
         $validator->make(request()->all());
 

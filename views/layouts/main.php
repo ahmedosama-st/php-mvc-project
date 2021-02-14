@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
-    <title>Bloggy</title>
+    <title><?= env('APP_NAME'); ?></title>
 
     <?php include base_path() . 'views/partials/navbar.php'; ?>
   </head>

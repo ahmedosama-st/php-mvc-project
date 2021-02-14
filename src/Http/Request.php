@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Http;
+namespace SecTheater\Http;
 
-use Acme\Support\Arr;
+use SecTheater\Support\Arr;
 
 class Request
 {

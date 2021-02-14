@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Support;
+namespace SecTheater\Support;
 
 class Str
 {

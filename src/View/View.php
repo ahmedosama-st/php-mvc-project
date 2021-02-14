@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\View;
+namespace SecTheater\View;
 
 class View
 {

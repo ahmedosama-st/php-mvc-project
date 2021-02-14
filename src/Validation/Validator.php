@@ -1,19 +1,19 @@
 <?php
 
-namespace Acme\Validation;
+namespace SecTheater\Validation;
 
 class Validator
 {
     protected array $data = [];
 
-    protected array $errors = [];
-
     protected array $rules = [];
+
+    protected ErrorBag $errorBag;
 
     public function make($data)
     {
         $this->data = $data;
-
+        $this->errorBag = new ErrorBag;
         $this->applyRules();
     }
 
@@ -25,12 +25,17 @@ class Validator
     protected function applyRules()
     {
         foreach ($this->rules as $key => $rules) {
-            foreach ($rules as $rule) {
-                if (!call_user_func([$rule, 'apply'], $this->data[$key])) {
-                    $this->errors[$key][] = Message::generate($rule, $key);
+            foreach ($this->getResolvedRules($rules) as $rule) {
+                if (!$rule->apply($this->data[$key])) {
+                    $this->errorBag->add($key, Message::generate($rule, $key));
                 }
             }
         }
+    }
+
+    protected function getResolvedRules($rules)
+    {
+        return RuleMap::resolve($rules);
     }
 
     public function passes()
@@ -40,6 +45,6 @@ class Validator
 
     public function errors()
     {
-        return $this->errors;
+        return $this->errorBag->errors;
     }
 }

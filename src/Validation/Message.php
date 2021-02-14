@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Validation;
+namespace SecTheater\Validation;
 
 class Message
 {

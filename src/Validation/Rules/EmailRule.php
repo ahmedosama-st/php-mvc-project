@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Validation\Rules;
+namespace SecTheater\Validation\Rules;
 
-use Acme\Validation\Rules\Contract\Rule;
+use SecTheater\Validation\Rules\Contract\Rule;
 
 class EmailRule implements Rule
 {
@@ -13,6 +13,6 @@ class EmailRule implements Rule
 
     public function __toString()
     {
-        return '%s is not a valid email address';
+        return 'your %s address is not a valid email address';
     }
 }

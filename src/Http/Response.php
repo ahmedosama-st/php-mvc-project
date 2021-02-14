@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Http;
+namespace SecTheater\Http;
 
 class Response
 {

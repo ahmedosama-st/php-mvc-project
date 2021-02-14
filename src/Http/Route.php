@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\Http;
+namespace SecTheater\Http;
 
-use Acme\View\View;
+use SecTheater\View\View;
 
 class Route
 {

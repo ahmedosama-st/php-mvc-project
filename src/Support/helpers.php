@@ -1,15 +1,15 @@
 <?php
 
-use Acme\View\View;
-use Acme\Application;
-use Acme\Http\Request;
-use Acme\Support\Hash;
-use Acme\Validation\Validator;
+use SecTheater\View\View;
+use SecTheater\Application;
+use SecTheater\Http\Request;
+use SecTheater\Support\Hash;
+use SecTheater\Validation\Validator;
 
 if (!function_exists('env')) {
-    function env($key)
+    function env($key, $default = null)
     {
-        return $_ENV[$key];
+        return $_ENV[$key] ?: $default;
     }
 }
 
@@ -77,5 +77,12 @@ if (!function_exists('bcrypt')) {
     function bcrypt($data)
     {
         return Hash::make($data);
+    }
+}
+
+if (!function_exists('database_path')) {
+    function database_path()
+    {
+        return base_path() . 'database/';
     }
 }
