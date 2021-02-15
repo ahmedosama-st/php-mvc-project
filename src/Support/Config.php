@@ -6,9 +6,11 @@ class Config implements \ArrayAccess
 {
     protected array $items = [];
 
-    public function __construct(array $items)
+    public function __construct($items)
     {
-        $this->items = $items;
+        foreach ($items as $key => $item) {
+            $this->items[$key] = $item;
+        }
     }
 
     public function get($key, $default = null)

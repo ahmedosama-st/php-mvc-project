@@ -36,6 +36,13 @@ if (!function_exists('view_path')) {
     }
 }
 
+if (!function_exists('config_path')) {
+    function config_path()
+    {
+        return base_path() . 'config/';
+    }
+}
+
 if (!function_exists('value')) {
     function value($value)
     {
