@@ -16,6 +16,7 @@ class SQLiteManager implements DatabaseManager
 
         return self::$instance;
     }
+
     public function raw(string $query)
     {
         throw new \Exception('Method raw() is not implemented.');
@@ -31,17 +32,17 @@ class SQLiteManager implements DatabaseManager
         throw new \Exception('Method create() is not implemented.');
     }
 
-    public function read(int|string $filter)
+    public function read($columns = '*', $filter = null)
     {
         throw new \Exception('Method read() is not implemented.');
     }
 
-    public function update(int|string $clause, mixed $data)
+    public function update($clause, mixed $data)
     {
         throw new \Exception('Method update() is not implemented.');
     }
 
-    public function delete(int|string $clause)
+    public function delete($clause)
     {
         throw new \Exception('Method delete() is not implemented.');
     }

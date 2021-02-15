@@ -2,6 +2,7 @@
 
 namespace SecTheater\Database\Managers;
 
+use App\Models\Model;
 use SecTheater\Database\Grammars\MySQLGrammar;
 use SecTheater\Database\Managers\Contracts\DatabaseManager;
 
@@ -12,7 +13,7 @@ class MySQLManager implements DatabaseManager
     public function connect(): \PDO
     {
         if (!self::$instance) {
-            self::$instance = new \PDO(env('DB_DRIVER') . ":host=" . env("DB_HOST") . ";dbname=" . env('DB_DATABASE'), env('DB_USERNAME'), env('DB_PASSWORD'));
+            self::$instance = new \PDO(env('DB_DRIVER') . ':host=' . env('DB_HOST') . ';dbname=' . env('DB_DATABASE'), env('DB_USERNAME'), env('DB_PASSWORD'));
         }
 
         return self::$instance;
@@ -31,29 +32,38 @@ class MySQLManager implements DatabaseManager
 
     public function create(mixed $data)
     {
-        $query = MySQLGrammar::build("INSERT", array_keys($data));
+        $query = MySQLGrammar::buildInsertQuery(array_keys($data));
 
         $stmt = self::$instance->prepare($query);
 
-
-        for($i = 1; $i <= count($values = array_values($data)); $i++) {
+        for ($i = 1; $i <= count($values = array_values($data)); $i++) {
             $stmt->bindValue($i, $values[$i - 1]);
         }
 
         return $stmt->execute();
     }
 
-    public function read(int|string $filter)
+    public function read($columns = '*', $filter = null)
     {
-        throw new \Exception('Method read() is not implemented.');
+        $query = MySQLGrammar::buildSelectQuery($columns, $filter);
+
+        $stmt = self::$instance->prepare($query);
+
+        if ($filter) {
+            $stmt->bindValue(1, $filter[2]);
+        }
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, Model::getModel());
     }
 
-    public function update(int|string $clause, mixed $data)
+    public function update($clause, mixed $data)
     {
         throw new \Exception('Method update() is not implemented.');
     }
 
-    public function delete(int|string $clause)
+    public function delete($clause)
     {
         throw new \Exception('Method delete() is not implemented.');
     }

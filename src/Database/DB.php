@@ -32,6 +32,11 @@ class DB
         return $this->manager->create($data);
     }
 
+    protected function read($columns = '*', $filter = null)
+    {
+        return $this->manager->read($columns, $filter);
+    }
+
     public function __call($name, $arguments)
     {
         if (method_exists($this, $name)) {
