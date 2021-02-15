@@ -36,6 +36,13 @@ if (!function_exists('view_path')) {
     }
 }
 
+if (!function_exists('value')) {
+    function value($value)
+    {
+        return $value instanceof Closure ? $value() : $value;
+    }
+}
+
 if (!function_exists('public_path')) {
     function public_path()
     {
