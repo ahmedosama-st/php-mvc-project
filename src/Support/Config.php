@@ -4,37 +4,63 @@ namespace SecTheater\Support;
 
 class Config implements \ArrayAccess
 {
-    protected array $configurations = [];
+    protected array $items = [];
 
-    public function __construct(array $configurations)
+    public function __construct(array $items)
     {
-        $this->configurations = $configurations;
+        $this->items = $items;
     }
 
-    public function get($key)
+    public function get($key, $default = null)
     {
-        return Arr::get($this->configurations, $key);
+        if (is_array($key)) {
+            return $this->getMany($key);
+        }
+
+        return Arr::get($this->items, $key, $default);
     }
 
     public function getMany($keys)
     {
-        $array = [];
+        $config = [];
 
-        foreach ($keys as $key) {
-            $array[] = $this->get($key);
+        foreach ($keys as $key => $default) {
+            if (is_numeric($key)) {
+                [$key, $default] = [$default, null];
+            }
+
+            $config[$key] = Arr::get($this->items, $key, $default);
         }
 
-        return $array;
+        return $config;
     }
 
-    public function set($key, $value)
+    public function set($key, $value = null)
     {
-        Arr::set($this->configurations, $key, $value);
+        $keys = is_array($key) ? $key : [$key => $value];
+
+        foreach ($keys as $key => $value) {
+            Arr::set($this->items, $key, $value);
+        }
+    }
+
+    public function push($key, $value)
+    {
+        $array = $this->get($key);
+
+        $array[] = $value;
+
+        $this->set($key, $array);
+    }
+
+    public function all()
+    {
+        return $this->items;
     }
 
     public function exists($key)
     {
-        return Arr::exists($this->configurations, $key);
+        return Arr::exists($this->items, $key);
     }
 
     public function offsetGet($offset)
