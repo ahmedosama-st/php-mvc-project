@@ -36,7 +36,7 @@ class Application
         };
     }
 
-    public function loadConfigurations()
+    protected function loadConfigurations()
     {
         foreach(scandir(config_path()) as $file) {
             if ($file == '.' || $file == '..') {
