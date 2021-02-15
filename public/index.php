@@ -10,9 +10,3 @@ $dotenv = Dotenv::createImmutable(base_path());
 $dotenv->load();
 
 app()->run();
-
-app()->db->create([
-    'username' => 'ahmedosama',
-    'email' => 'marvelphp5@gmail.com',
-    'password' => 'secret'
-]);

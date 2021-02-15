@@ -10,7 +10,7 @@ class DB
     use ConnectsTo;
 
     protected \PDO $capsule;
-    protected DatabaseManager $manager;
+    protected ?DatabaseManager $manager;
 
     public function __construct(DatabaseManager $manager)
     {
@@ -22,13 +22,20 @@ class DB
         $this->capsule = ConnectsTo::connect($this->manager);
     }
 
-    public function raw(string $query)
+    protected function raw(string $query)
     {
-        $this->manager->query($query);
+        return $this->manager->query($query);
     }
 
-    public function create(array $data)
+    protected function create(array $data)
     {
-        $this->manager->create($data);
+        return $this->manager->create($data);
+    }
+
+    public function __call($name, $arguments)
+    {
+        if (method_exists($this, $name)) {
+            return call_user_func_array([$this, $name], $arguments);
+        }
     }
 }

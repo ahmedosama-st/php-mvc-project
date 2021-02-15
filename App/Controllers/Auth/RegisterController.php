@@ -2,8 +2,9 @@
 
 namespace App\Controllers\Auth;
 
-use SecTheater\Validation\Validator;
+use App\Models\User;
 use App\Controllers\Controller;
+use SecTheater\Validation\Validator;
 
 class RegisterController extends Controller
 {
@@ -21,8 +22,13 @@ class RegisterController extends Controller
         ]);
         $validator->make(request()->all());
 
-        var_dump($validator->errors());
         if ($validator->passes()) {
+            User::create([
+                'username' => request('username'),
+                'name' => request('name'),
+                'email' => request('email'),
+                'password' => bcrypt(request('password'))
+            ]);
         }
     }
 }

@@ -20,6 +20,15 @@ if (!function_exists('base_path')) {
     }
 }
 
+if (!function_exists('class_basename')) {
+    function class_basename($class)
+    {
+        $class = is_object($class) ? get_class($class) : $class;
+
+        return basename(str_replace('\\', '/', $class));
+    }
+}
+
 if (!function_exists('view_path')) {
     function view_path()
     {
@@ -54,12 +63,22 @@ if (!function_exists('app')) {
 }
 
 if (!function_exists('request')) {
-    function request()
+    function request($key = null)
     {
         $instance = new Request;
 
         if (!$instance) {
             return new Request;
+        }
+
+        if ($key) {
+            if (is_string($key)) {
+                return $instance->get($key);
+            }
+
+            if (is_array($key)) {
+                return $instance->only($key);
+            }
         }
 
         return $instance;

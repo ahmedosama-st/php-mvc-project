@@ -2,6 +2,7 @@
 
 namespace SecTheater\Database\Managers;
 
+use SecTheater\Database\Grammars\MySQLGrammar;
 use SecTheater\Database\Managers\Contracts\DatabaseManager;
 
 class MySQLManager implements DatabaseManager
@@ -30,10 +31,16 @@ class MySQLManager implements DatabaseManager
 
     public function create(mixed $data)
     {
-        $fields = array_keys($data);
-        $values = array_values($data);
+        $query = MySQLGrammar::build("INSERT", array_keys($data));
 
-        dump($fields, $values);
+        $stmt = self::$instance->prepare($query);
+
+
+        for($i = 1; $i <= count($values = array_values($data)); $i++) {
+            $stmt->bindValue($i, $values[$i - 1]);
+        }
+
+        return $stmt->execute();
     }
 
     public function read(int|string $filter)
