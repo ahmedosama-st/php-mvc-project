@@ -82,10 +82,10 @@ if (!function_exists('view')) {
 if (!function_exists('app')) {
     function app()
     {
-        $instance = new Application;
+        static $instance = null;
 
         if (!$instance) {
-            return new Application;
+            $instance = new Application;
         }
         return $instance;
     }

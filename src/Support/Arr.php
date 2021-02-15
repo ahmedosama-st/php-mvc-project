@@ -32,10 +32,8 @@ class Arr
         }
 
         $keys = explode('.', $key);
-
         while (count($keys) > 1) {
             $key = array_shift($keys);
-
             if (!isset($array[$key]) || !is_array($array[$key])) {
                 $array[$key] = [];
             }
@@ -134,8 +132,6 @@ class Arr
         $result = [];
 
         foreach ($array as $item) {
-            $item = $item instanceof Collection ? $item->all() : $item;
-
             if (!is_array($item)) {
                 $result[] = $item;
             } elseif ($depth === 1) {
