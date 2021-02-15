@@ -4,16 +4,37 @@ namespace SecTheater\Support;
 
 class Config implements \ArrayAccess
 {
-    public static function get($key)
+    protected array $configurations = [];
+
+    public function __construct(array $configurations)
     {
+        $this->configurations = $configurations;
     }
 
-    public static function getMany()
+    public function get($key)
     {
+        return Arr::get($this->configurations, $key);
     }
 
-    public static function set($key, $value)
+    public function getMany($keys)
     {
+        $array = [];
+
+        foreach ($keys as $key) {
+            $array[] = $this->get($key);
+        }
+
+        return $array;
+    }
+
+    public function set($key, $value)
+    {
+        Arr::set($this->configurations, $key, $value);
+    }
+
+    public function exists($key)
+    {
+        return Arr::exists($this->configurations, $key);
     }
 
     public function offsetGet($offset)

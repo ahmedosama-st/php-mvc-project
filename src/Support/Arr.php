@@ -25,6 +25,10 @@ class Arr
         return array_key_exists($key, $array);
     }
 
+    public function set(&$array, $key, $value)
+    {
+    }
+
     public static function get($array, $key, $default = null)
     {
         if (!static::accessible($array)) {

@@ -3,6 +3,7 @@
 namespace SecTheater\Http;
 
 use SecTheater\Support\Arr;
+use SecTheater\Support\Str;
 
 class Request
 {
@@ -14,7 +15,7 @@ class Request
 
     public function method()
     {
-        return strtolower($_SERVER['REQUEST_METHOD']);
+        return Str::lower($_SERVER['REQUEST_METHOD']);
     }
 
     public function all()
