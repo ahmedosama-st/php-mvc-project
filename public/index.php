@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 use Dotenv\Dotenv;
 
 require_once __DIR__ . '/../src/Support/helpers.php';

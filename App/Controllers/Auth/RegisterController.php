@@ -17,14 +17,22 @@ class RegisterController extends Controller
     {
         $validator = new Validator;
         $validator->setRules([
-            'username' => ['required', 'alnum'],
-            'email' => 'required|email'
+            'name' => 'required|alnum|between:8,32',
+            'username' => 'required|alnum|between:8,32',
+            'email' => 'required|email',
+            'password' => 'required|alnum|between:8,32|confirmed',
+            'password_confirmation' => 'required|alnum|between:8,32'
+        ]);
+
+        $validator->setAliases([
+            'password_confirmation' => 'Password confirmation'
         ]);
 
         $validator->make(request()->all());
 
         if (!$validator->passes()) {
-            return back()->withErrors($validator->errors());
+            app()->session->setFlash('errors', $validator->errors());
+            return back();
         }
 
         User::create([
@@ -34,6 +42,7 @@ class RegisterController extends Controller
             'password' => bcrypt(request('password'))
         ]);
 
-        return back()->withSuccess(['message' => 'Account created successfully']);
+        app()->session->setFlash('success', 'Registered sucessfully :D');
+        return back();
     }
 }

@@ -4,15 +4,15 @@ namespace SecTheater\Validation\Rules;
 
 use SecTheater\Validation\Rules\Contract\Rule;
 
-class AlphaNumRule implements Rule
+class ConfirmedRule implements Rule
 {
     public function apply($field, $value, $data)
     {
-        return preg_match('/^[a-zA-Z0-9]+/', $value);
+        return ($data[$field] === $data[$field . '_confirmation']);
     }
 
     public function __toString()
     {
-        return '%s must be alpha numeric only';
+        return '%s does not match %s confirmation';
     }
 }

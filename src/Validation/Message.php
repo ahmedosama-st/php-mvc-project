@@ -4,8 +4,8 @@ namespace SecTheater\Validation;
 
 class Message
 {
-    public static function generate($rule, $key)
+    public static function generate($rule, $field)
     {
-        return str_replace('%s', $key, $rule);
+        return str_replace('%s', $field, $rule);
     }
 }

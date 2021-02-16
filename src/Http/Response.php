@@ -11,7 +11,7 @@ class Response
 
     public function back()
     {
-        // header('Location:' . $_SERVER['HTTP_REFERER']);
+        header('Location:' . $_SERVER['HTTP_REFERER']);
 
         return $this;
     }
@@ -22,7 +22,6 @@ class Response
 
     public function withErrors($data)
     {
-        var_dump($data);
     }
 
     public function withSuccess($data)

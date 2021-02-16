@@ -7,6 +7,7 @@ use SecTheater\Database\DB;
 use SecTheater\Http\Request;
 use SecTheater\Http\Response;
 use SecTheater\Support\Config;
+use SecTheater\Support\Session;
 use SecTheater\Database\Managers\MySQLManager;
 use SecTheater\Database\Managers\SQLiteManager;
 
@@ -17,6 +18,7 @@ class Application
     protected Response $response;
     protected DB $db;
     protected Config $config;
+    protected Session $session;
 
     public function __construct()
     {
@@ -25,6 +27,7 @@ class Application
         $this->route = new Route($this->request, $this->response);
         $this->db = new DB($this->getDatabaseDriver());
         $this->config = new Config($this->loadConfigurations());
+        $this->session = new Session;
     }
 
     protected function getDatabaseDriver()
