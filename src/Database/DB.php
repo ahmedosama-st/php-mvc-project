@@ -22,9 +22,10 @@ class DB
         $this->capsule = ConnectsTo::connect($this->manager);
     }
 
-    protected function raw(string $query)
+    protected function raw(string $query, $value)
     {
-        return $this->manager->query($query);
+        // var_dump($query);
+        return $this->manager->query($query, $value);
     }
 
     protected function create(array $data)

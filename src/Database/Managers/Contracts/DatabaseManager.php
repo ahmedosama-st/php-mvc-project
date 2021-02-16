@@ -6,9 +6,7 @@ interface DatabaseManager
 {
     public function connect(): \PDO;
 
-    public function raw(string $query);
-
-    public function query(string $query);
+    public function query(string $query, $values);
 
     public function create(mixed $data);
 

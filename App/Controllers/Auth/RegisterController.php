@@ -19,7 +19,7 @@ class RegisterController extends Controller
         $validator->setRules([
             'name' => 'required|alnum|between:8,32',
             'username' => 'required|alnum|between:8,32',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|alnum|between:8,32|confirmed',
             'password_confirmation' => 'required|alnum|between:8,32'
         ]);

@@ -7,6 +7,7 @@ use SecTheater\Validation\Rules\BetweenRule;
 use SecTheater\Validation\Rules\AlphaNumRule;
 use SecTheater\Validation\Rules\RequiredRule;
 use SecTheater\Validation\Rules\ConfirmedRule;
+use SecTheater\Validation\Rules\UniqueRule;
 
 class RuleMap
 {
@@ -15,7 +16,8 @@ class RuleMap
         'email' => EmailRule::class,
         'alnum' => AlphaNumRule::class,
         'between' => BetweenRule::class,
-        'confirmed' => ConfirmedRule::class
+        'confirmed' => ConfirmedRule::class,
+        'unique' => UniqueRule::class
     ];
 
     public static function resolve($rule, $options)

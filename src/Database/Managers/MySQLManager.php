@@ -19,15 +19,11 @@ class MySQLManager implements DatabaseManager
         return self::$instance;
     }
 
-    public function raw(string $query)
-    {
-        throw new \Exception('Method raw() is not implemented.');
-    }
-
-    public function query(string $query)
+    public function query($query, $value)
     {
         $stmt = self::$instance->prepare($query);
-        var_dump($stmt->execute());
+        $stmt->bindValue(1, $value);
+        return ($stmt->execute());
     }
 
     public function create(mixed $data)
