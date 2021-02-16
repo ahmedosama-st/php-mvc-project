@@ -142,3 +142,12 @@ if (!function_exists('database_path')) {
         return base_path() . 'database/';
     }
 }
+
+if (!function_exists('old')) {
+    function old($key)
+    {
+        if (app()->session->hasFlash('old')) {
+            return app()->session->getFlash('old')[$key];
+        }
+    }
+}

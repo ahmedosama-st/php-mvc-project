@@ -18,7 +18,7 @@ class RegisterController extends Controller
         $validator = new Validator;
         $validator->setRules([
             'name' => 'required|alnum|between:8,32',
-            'username' => 'required|alnum|between:8,32',
+            'username' => 'required|alnum|between:8,32|unique:users,username',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|alnum|between:8,32|confirmed',
             'password_confirmation' => 'required|alnum|between:8,32'
@@ -32,6 +32,7 @@ class RegisterController extends Controller
 
         if (!$validator->passes()) {
             app()->session->setFlash('errors', $validator->errors());
+            app()->session->setFlash('old', request()->all());
             return back();
         }
 
