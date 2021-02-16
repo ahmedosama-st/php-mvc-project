@@ -17,7 +17,7 @@ $validator->setRules([
     'email' => 'required|email|unique:users,email'
 ]);
 $validator->make([
-    'email' => "marvelphp'5@gmail.com"
+    'email' => 'marvelphp5@gmail.com'
 ]);
 
 var_dump($validator->passes());

@@ -19,11 +19,16 @@ class MySQLManager implements DatabaseManager
         return self::$instance;
     }
 
-    public function query($query, $value)
+    public function query($query, $values)
     {
         $stmt = self::$instance->prepare($query);
-        $stmt->bindValue(1, $value);
-        return ($stmt->execute());
+        for ($i = 1; $i <= count($values); $i++) {
+            $stmt->bindValue($i, $values[$i - 1]);
+        }
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function create(mixed $data)
