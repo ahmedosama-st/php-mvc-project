@@ -20,15 +20,20 @@ class RegisterController extends Controller
             'username' => ['required', 'alnum'],
             'email' => 'required|email'
         ]);
+
         $validator->make(request()->all());
 
-        if ($validator->passes()) {
-            User::create([
-                'username' => request('username'),
-                'name' => request('name'),
-                'email' => request('email'),
-                'password' => bcrypt(request('password'))
-            ]);
+        if (!$validator->passes()) {
+            return back()->withErrors($validator->errors());
         }
+
+        User::create([
+            'username' => request('username'),
+            'name' => request('name'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password'))
+        ]);
+
+        return back()->withSuccess(['message' => 'Account created successfully']);
     }
 }

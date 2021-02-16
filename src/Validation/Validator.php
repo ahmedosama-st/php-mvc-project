@@ -43,8 +43,8 @@ class Validator
         return empty($this->errors());
     }
 
-    public function errors()
+    public function errors($key = null)
     {
-        return $this->errorBag->errors;
+        return $key ? $this->errorBag->errors[$key] : $this->errorBag->errors;
     }
 }

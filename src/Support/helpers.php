@@ -4,6 +4,7 @@ use SecTheater\View\View;
 use SecTheater\Application;
 use SecTheater\Http\Request;
 use SecTheater\Support\Hash;
+use SecTheater\Http\Response;
 use SecTheater\Validation\Validator;
 
 if (!function_exists('env')) {
@@ -76,6 +77,13 @@ if (!function_exists('view')) {
     function view($view, $params = [])
     {
         View::make($view, $params);
+    }
+}
+
+if (!function_exists('back')) {
+    function back()
+    {
+        return (new Response)->back();
     }
 }
 
