@@ -7,10 +7,7 @@ use SecTheater\Database\Managers\Contracts\DatabaseManager;
 
 class DB
 {
-    use ConnectsTo;
-
-    protected \PDO $capsule;
-    protected ?DatabaseManager $manager;
+    protected DatabaseManager $manager;
 
     public function __construct(DatabaseManager $manager)
     {
@@ -19,18 +16,27 @@ class DB
 
     public function init()
     {
-        $this->capsule = ConnectsTo::connect($this->manager);
+        ConnectsTo::connect($this->manager);
     }
 
-    protected function raw(string $query, $value)
+    protected function raw(string $query, $value = [])
     {
-        // var_dump($query);
         return $this->manager->query($query, $value);
     }
 
     protected function create(array $data)
     {
         return $this->manager->create($data);
+    }
+
+    protected function delete($id)
+    {
+        return $this->manager->delete($id);
+    }
+
+    protected function update($id, array $attributes)
+    {
+        return $this->manager->update($id, $attributes);
     }
 
     protected function read($columns = '*', $filter = null)

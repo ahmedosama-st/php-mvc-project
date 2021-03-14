@@ -6,13 +6,13 @@ interface DatabaseManager
 {
     public function connect(): \PDO;
 
-    public function query(string $query, $values);
+    public function query(string $query, $values = []);
 
-    public function create(mixed $data);
+    public function create($data);
 
     public function read($columns = '*', $filter = null);
 
-    public function update($clause, mixed $data);
+    public function update($id, $data);
 
-    public function delete($clause);
+    public function delete($id);
 }

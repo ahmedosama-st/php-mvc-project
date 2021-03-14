@@ -19,9 +19,10 @@ class MySQLManager implements DatabaseManager
         return self::$instance;
     }
 
-    public function query($query, $values)
+    public function query(string $query, $values = [])
     {
         $stmt = self::$instance->prepare($query);
+
         for ($i = 1; $i <= count($values); $i++) {
             $stmt->bindValue($i, $values[$i - 1]);
         }
@@ -31,24 +32,11 @@ class MySQLManager implements DatabaseManager
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function create(mixed $data)
-    {
-        $query = MySQLGrammar::buildInsertQuery(array_keys($data));
-
-        $stmt = self::$instance->prepare($query);
-
-        for ($i = 1; $i <= count($values = array_values($data)); $i++) {
-            $stmt->bindValue($i, $values[$i - 1]);
-        }
-
-        return $stmt->execute();
-    }
-
     public function read($columns = '*', $filter = null)
     {
         $query = MySQLGrammar::buildSelectQuery($columns, $filter);
 
-        $stmt = self::$instance->prepare($query);
+        $stmt = Self::$instance->prepare($query);
 
         if ($filter) {
             $stmt->bindValue(1, $filter[2]);
@@ -59,13 +47,43 @@ class MySQLManager implements DatabaseManager
         return $stmt->fetchAll(\PDO::FETCH_CLASS, Model::getModel());
     }
 
-    public function update($clause, mixed $data)
+    public function delete($id)
     {
-        throw new \Exception('Method update() is not implemented.');
+        $query = MySQLGrammar::buildDeleteQuery();
+
+        $stmt = self::$instance->prepare($query);
+
+        $stmt->bindValue(1, $id);
+
+        return $stmt->execute();
     }
 
-    public function delete($clause)
+    public function update($id, $attributes)
     {
-        throw new \Exception('Method delete() is not implemented.');
+        $query = MySQLGrammar::buildUpdateQuery(array_keys($attributes));
+
+        $stmt = self::$instance->prepare($query);
+
+        for ($i = 1; $i <= count($values = array_values($attributes)); $i++) {
+            $stmt->bindValue($i, $values[$i - 1]);
+            if ($i == count($values)) {
+                $stmt->bindValue($i + 1, $id);
+            }
+        }
+
+        return $stmt->execute();
+    }
+
+    public function create($data)
+    {
+        $query = MySQLGrammar::buildInsertQuery(array_keys($data));
+
+        $stmt = self::$instance->prepare($query);
+
+        for ($i = 1; $i <= count($values = array_values($data)); $i++) {
+            $stmt->bindValue($i, $values[$i - 1]);
+        }
+
+        return $stmt->execute();
     }
 }
