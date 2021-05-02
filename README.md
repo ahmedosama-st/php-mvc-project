@@ -8,14 +8,7 @@
 
 ## Don't forget to follow us
 
-> [Facebook page](https://bit.ly/39dTot4)
-
-> [Facebook group](https://bit.ly/39c5YsH)
-
-> [Telegram channel](https://bit.ly/35Zd41Z)
-
-> [Telegram group](https://bit.ly/361mzOd)
-
-> [Discord](https://bit.ly/39c8Ohw)
-
-> [Youtube](https://bit.ly/2J3v95R)
+[<img src="https://img.shields.io/badge/-Facebook-1877F2?style=for-the-badge&logo=Facebook&logoColor=white"/>](https://www.facebook.com/SecTheaterEG)
+[<img src="https://img.shields.io/badge/-Telegram-26A5E4?style=for-the-badge&logo=Telegram&logoColor=white"/>](https://t.me/sectheater)
+[<img src="https://img.shields.io/badge/-Discord-7289DA?style=for-the-badge&logo=Discord&logoColor=white"/>](https://discord.com/invite/4VqCstahAR)
+[<img src="https://img.shields.io/badge/-YouTube-FF0000?style=for-the-badge&logo=YouTube&logoColor=white"/>](http://youtube.com/c/SecTheater/)
