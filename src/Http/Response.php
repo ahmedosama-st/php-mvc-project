@@ -15,16 +15,4 @@ class Response
 
         return $this;
     }
-
-    public function with()
-    {
-    }
-
-    public function withErrors($data)
-    {
-    }
-
-    public function withSuccess($data)
-    {
-    }
 }
