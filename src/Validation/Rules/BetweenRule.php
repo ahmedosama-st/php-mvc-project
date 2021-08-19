@@ -15,7 +15,7 @@ class BetweenRule implements Rule
         $this->max = $max;
     }
 
-    public function apply($field, $value, $data)
+    public function apply($field, $value, $data = [])
     {
         if (strlen($value) < $this->min) {
             return false;

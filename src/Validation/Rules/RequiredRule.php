@@ -6,7 +6,7 @@ use SecTheater\Validation\Rules\Contract\Rule;
 
 class RequiredRule implements Rule
 {
-    public function apply($field, $value, $data)
+    public function apply($field, $value, $data = [])
     {
         return !empty($value);
     }

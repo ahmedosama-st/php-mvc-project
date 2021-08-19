@@ -6,7 +6,7 @@ use SecTheater\Validation\Rules\Contract\Rule;
 
 class ConfirmedRule implements Rule
 {
-    public function apply($field, $value, $data)
+    public function apply($field, $value, $data = [])
     {
         return ($data[$field] === $data[$field . '_confirmation']);
     }

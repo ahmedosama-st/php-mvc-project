@@ -6,9 +6,9 @@ use SecTheater\Validation\Rules\Contract\Rule;
 
 class AlphaNumRule implements Rule
 {
-    public function apply($field, $value, $data)
+    public function apply($field, $value, $data = [])
     {
-        return preg_match('/^[a-zA-Z0-9]+/', $value);
+        return preg_match('/^[a-zA-Z0-9_ -]+$/', $value);
     }
 
     public function __toString()
