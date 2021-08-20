@@ -1,4 +1,5 @@
 .idea
 .env
 vendor/
-
+.vscode/
+.phpunit.result.cache

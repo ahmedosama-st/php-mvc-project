@@ -40,6 +40,7 @@ class Config implements \ArrayAccess
     public function set($key, $value = null)
     {
         $keys = is_array($key) ? $key : [$key => $value];
+
         foreach ($keys as $key => $value) {
             Arr::set($this->items, $key, $value);
         }
