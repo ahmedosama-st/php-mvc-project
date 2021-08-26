@@ -10,8 +10,8 @@
         <testsuite name="unit">
             <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>
-        <testsuite name="feature">
+        <!-- <testsuite name="feature">
             <directory suffix="Test.php">./tests/Feature</directory>
-        </testsuite>
+        </testsuite> -->
     </testsuites>
 </phpunit>
