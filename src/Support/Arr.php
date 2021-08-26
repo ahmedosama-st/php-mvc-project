@@ -186,7 +186,7 @@ class Arr
     public static function get($array, $key, $default = null)
     {
         if (!static::accessible($array)) {
-            return ($default);
+            return value($default);
         }
 
         if (is_null($key)) {
@@ -198,7 +198,7 @@ class Arr
         }
 
         if (mb_strpos($key, '.') === false) {
-            return $array[$key] ?? ($default);
+            return $array[$key] ?? value($default);
         }
 
         foreach (explode('.', $key) as $segment) {
