@@ -32,8 +32,10 @@ class Arr
         }
 
         $keys = explode('.', $key);
+
         while (count($keys) > 1) {
             $key = array_shift($keys);
+
             if (!isset($array[$key]) || !is_array($array[$key])) {
                 $array[$key] = [];
             }
@@ -75,8 +77,8 @@ class Arr
         }
 
         foreach ($array as $key => $value) {
-            if (call_user_func($callback, $value, $key)) {
-                return $value;
+            if ($callback($value, $key)) {
+                return call_user_func($callback, $value, $key);
             }
         }
 
@@ -195,7 +197,7 @@ class Arr
             return $array[$key];
         }
 
-        if (strpos($key, '.') === false) {
+        if (mb_strpos($key, '.') === false) {
             return $array[$key] ?? ($default);
         }
 
