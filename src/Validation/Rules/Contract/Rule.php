@@ -2,9 +2,7 @@
 
 namespace SecTheater\Validation\Rules\Contract;
 
-interface Rule
+interface Rule extends \Stringable
 {
     public function apply($field, $value, $data = []);
-
-    public function __toString();
 }
