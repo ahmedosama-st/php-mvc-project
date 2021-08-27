@@ -13,6 +13,11 @@ class Config implements \ArrayAccess
         }
     }
 
+    public function has($keys)
+    {
+        return Arr::has($this->items, $keys);
+    }
+
     public function get($key, $default = null)
     {
         if (is_array($key)) {
@@ -52,7 +57,7 @@ class Config implements \ArrayAccess
 
         $array[] = $value;
 
-        $this->set($key, $array);
+        $this->set($key, ...$array);
     }
 
     public function all()
