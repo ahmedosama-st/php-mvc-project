@@ -16,7 +16,9 @@ class View
     protected static function getBaseContent()
     {
         ob_start();
+
         include base_path() . 'views/layouts/main.php';
+
         return ob_get_clean();
     }
 
@@ -31,6 +33,7 @@ class View
 
         if (str_contains($view, '.')) {
             $views = explode('.', $view);
+
             foreach ($views as $view) {
                 if (is_dir($path . $view)) {
                     $path = $path . $view . '/';
@@ -41,15 +44,15 @@ class View
             $view = $path . $view . '.php';
         }
 
-        foreach ($params as $param => $value) {
-            $$param = $value;
-        }
+        extract($params);
 
         if ($isError) {
             include $view;
         } else {
             ob_start();
+
             include $view;
+
             return ob_get_clean();
         }
     }
