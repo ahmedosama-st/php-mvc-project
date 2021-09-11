@@ -10,14 +10,14 @@ class View
 
         $viewContent = self::getViewContent($view, params: $params);
 
-        echo(str_replace('{{content}}', $viewContent, $baseContent));
+        return (str_replace('{{content}}', $viewContent, $baseContent));
     }
 
     protected static function getBaseContent()
     {
         ob_start();
 
-        include base_path() . 'views/layouts/main.php';
+        include view_path() . 'layouts/main.php';
 
         return ob_get_clean();
     }

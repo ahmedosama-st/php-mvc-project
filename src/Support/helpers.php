@@ -10,7 +10,11 @@ use SecTheater\Validation\Validator;
 if (!function_exists('env')) {
     function env($key, $default = null)
     {
-        return $_ENV[$key] ?: $default;
+        if (array_key_exists($key, $_ENV)) {
+            return $_ENV[$key];
+        }
+
+        return $default;
     }
 }
 
@@ -76,14 +80,14 @@ if (!function_exists('public_path')) {
 if (!function_exists('view')) {
     function view($view, $params = [])
     {
-        View::make($view, $params);
+        echo View::make($view, $params);
     }
 }
 
 if (!function_exists('back')) {
     function back()
     {
-        return (new Response)->back();
+        return (new Response())->back();
     }
 }
 
@@ -93,8 +97,9 @@ if (!function_exists('app')) {
         static $instance = null;
 
         if (!$instance) {
-            $instance = new Application;
+            $instance = new Application();
         }
+
         return $instance;
     }
 }
@@ -102,10 +107,10 @@ if (!function_exists('app')) {
 if (!function_exists('request')) {
     function request($key = null)
     {
-        $instance = new Request;
+        $instance = new Request();
 
         if (!$instance) {
-            return new Request;
+            return new Request();
         }
 
         if ($key) {
