@@ -75,18 +75,18 @@ class Config implements \ArrayAccess
         $this->get($offset);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value) :void
     {
         $this->set($offset, $value);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset) :void
     {
         $this->set($offset, null);
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset) :bool
     {
-        $this->exists($offset);
+        return $this->exists($offset);
     }
 }
